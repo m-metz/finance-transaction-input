@@ -1,2 +1,2 @@
-# finance-transaction-input
-This is my "Finance Tracker Transaction Input" Power App Solution
+# Finance Tracker Transaction Input
+This is my Finance Tracker Transaction Input Power App Solution.
