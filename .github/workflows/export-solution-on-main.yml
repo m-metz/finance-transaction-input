@@ -69,7 +69,7 @@ jobs:
       with:
         solution-file: ${{ github.event.inputs.solution_exported_folder}}/${{ github.event.inputs.solution_name }}.zip
         solution-folder: ${{ github.event.inputs.solution_target_folder}}/${{ github.event.inputs.solution_name }}
-        solution-type: 'Managed'
+        solution-type: 'Unmanaged'
         overwrite-files: true
         
     - name: Commit changes
