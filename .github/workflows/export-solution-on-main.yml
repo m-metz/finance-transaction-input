@@ -13,7 +13,7 @@ on:
       commit_message:
         description: 'Commit message to use when commiting the solution. " must be escaped (\")'
         required: true
-        default: 'Updates from the DEV Power Platform environment.'
+        default: 'Export - DEV Environment'
       #Do Not change these values
       solution_exported_folder:
         description: 'Folder name for staging the exported solution. *do not change*'
