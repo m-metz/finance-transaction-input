@@ -24,7 +24,7 @@ on:
        required: true
        default: solutions
 env:
-#edit your values here
+  #edit your values here
   ENVIRONMENT_URL: 'https://mjmetzdev.crm3.dynamics.com'
   CLIENT_ID: 'cf0a9535-04c6-434e-9945-050d8ec245a6'
   TENANT_ID: 'bae0df29-f66c-4ef1-8310-98419b0cab33'
@@ -34,9 +34,11 @@ jobs:
   export-from-dev:
     runs-on: ubuntu-latest
     # or you can say runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
     env:
       RUNNER_DEBUG: 1
-
     steps:
     - uses: actions/checkout@v3
       with:
@@ -67,13 +69,15 @@ jobs:
         solution-folder: ${{ github.event.inputs.solution_target_folder }}/${{ github.event.inputs.solution_name }}
         solution-type: 'Unmanaged'
         overwrite-files: true
-        
+
     - name: Commit changes
       run: |
         git config --global user.email "6386318+m-metz@users.noreply.github.com"
         git config --global user.name "Mike Metz"
         git checkout main
-        git add '${{ github.event.inputs.solution_target_folder }}' 
-        git commit -m "${{github.event.inputs.commit_message}}"
+        # This will error out if the folder cannot be found, which is what we want during an export error.
+        git add '${{ github.event.inputs.solution_target_folder }}'
+        # || true to surpress commit error "nothing to commit" when there are no changes
+        git commit -m "${{github.event.inputs.commit_message}}" || true
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git push
