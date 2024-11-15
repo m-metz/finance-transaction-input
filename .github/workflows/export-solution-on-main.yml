@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     # or you can say runs-on: windows-latest
     steps:
-    - uses: m-metz/actions/export-solution-on-main.yml@main
+    - uses: m-metz/actions/export-solution-on-main@main
       with:
         solution_name: ${{ github.event.inputs.solution_name }}
         commit_message: ${{ github.event.inputs.commit_message }}
