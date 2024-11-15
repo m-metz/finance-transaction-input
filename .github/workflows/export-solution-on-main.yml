@@ -73,6 +73,14 @@ jobs:
         solution-name: ${{ github.event.inputs.solution_name }}
         solution-output-file: ${{ github.event.inputs.solution_exported_folder }}/${{ github.event.inputs.solution_name }}.zip
 
+    # This is so files removed from the new export will be committed, otherwise checkout
+    # adds the files back.
+    - name: Remove Old Solution
+      run: |
+        # Don't need -f because it is safer (ex. variables not filled in) and they should all be owned
+        # and writable by the user.
+        rm -r ${{ github.event.inputs.solution_target_folder }}/${{ github.event.inputs.solution_name }}
+
     - name: unpack-solution action
       uses: microsoft/powerplatform-actions/unpack-solution@v1
       with:
