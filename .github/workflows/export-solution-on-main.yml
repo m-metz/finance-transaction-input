@@ -86,8 +86,9 @@ jobs:
         git config --global user.email "6386318+m-metz@users.noreply.github.com"
         git config --global user.name "Mike Metz"
         git checkout main
+        # --no-ignore-removal (A.K.A. --all) is needed so that file and folder removals are also committed.
         # This will error out if the folder cannot be found, which is what we want during an export error.
-        git add '${{ github.event.inputs.solution_target_folder }}'
+        git add --no-ignore-removal '${{ github.event.inputs.solution_target_folder }}'
         # || true to surpress commit error "nothing to commit" when there are no changes
         git commit -m "${{github.event.inputs.commit_message}}" || true
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
