@@ -18,7 +18,7 @@ permissions:
   contents: write
 jobs:
   export-solution-on-main:
-    uses: m-metz/.github/workflows/export-solution-on-main.yml@main
+    uses: m-metz/actions/.github/workflows/export-solution-on-main.yml@main
     with:
       solution_name: ${{ github.event.inputs.solution_name }}
       commit_message: ${{ github.event.inputs.commit_message }}
