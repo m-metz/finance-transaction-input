@@ -79,7 +79,10 @@
         </Address>
       </Addresses>
     </Publisher>
-    <RootComponents />
+    <RootComponents>
+      <RootComponent type="1" schemaName="mmetz_exampletable" behavior="0" />
+      <RootComponent type="1" schemaName="mmetz_exampletable2" behavior="0" />
+    </RootComponents>
     <MissingDependencies />
   </SolutionManifest>
 </ImportExportXml>
