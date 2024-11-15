@@ -22,3 +22,5 @@ jobs:
     with:
       solution_name: ${{ github.event.inputs.solution_name }}
       commit_message: ${{ github.event.inputs.commit_message }}
+    permissions:
+      id-token: write
