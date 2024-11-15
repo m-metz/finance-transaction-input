@@ -1,16 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <EntityRelationship Name="business_unit_mmetz_exampletable" />
-  <EntityRelationship Name="business_unit_mmetz_exampletable2" />
   <EntityRelationship Name="lk_mmetz_exampletable_createdby" />
   <EntityRelationship Name="lk_mmetz_exampletable_modifiedby" />
-  <EntityRelationship Name="lk_mmetz_exampletable2_createdby" />
-  <EntityRelationship Name="lk_mmetz_exampletable2_modifiedby" />
-  <EntityRelationship Name="mmetz_exampletable2_ExampleRelationship_mmetz_exampletable" />
   <EntityRelationship Name="owner_mmetz_exampletable" />
-  <EntityRelationship Name="owner_mmetz_exampletable2" />
   <EntityRelationship Name="team_mmetz_exampletable" />
-  <EntityRelationship Name="team_mmetz_exampletable2" />
   <EntityRelationship Name="user_mmetz_exampletable" />
-  <EntityRelationship Name="user_mmetz_exampletable2" />
 </EntityRelationships>
