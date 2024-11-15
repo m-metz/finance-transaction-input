@@ -14,90 +14,14 @@ on:
         description: 'Commit message to use when commiting the solution. " must be escaped (\")'
         required: true
         default: 'Export - DEV Environment'
-      #Do Not change these values
-      solution_exported_folder:
-        description: 'Folder name for staging the exported solution. *do not change*'
-        required: true
-        default: out/exported
-      solution_target_folder: 
-       description: 'Folder name to be created and checked in. *do not change*'
-       required: true
-       default: solutions
-env:
-  #edit your values here
-  ENVIRONMENT_URL: 'https://mjmetzdev.crm3.dynamics.com'
-  CLIENT_ID: 'cf0a9535-04c6-434e-9945-050d8ec245a6'
-  TENANT_ID: 'bae0df29-f66c-4ef1-8310-98419b0cab33'
 permissions:
   contents: write
 jobs:
-  export-from-dev:
+  export-solution-on-main:
     runs-on: ubuntu-latest
     # or you can say runs-on: windows-latest
-    defaults:
-      run:
-        shell: bash
-    env:
-      RUNNER_DEBUG: 1
     steps:
-    - uses: actions/checkout@v3
+    - uses: m-metz/actions/export-solution-on-main@main
       with:
-        lfs: true
-    
-    # This is needed for all v1 powerplatform-actions. It installs some required command line
-    # tools like `pac` via `nuget` instead of packaging them with the actions using git lfs.
-    #
-    # If you used the lfs version (v0) of powerplatform-actions, Set up job frequently times
-    # out in 100 seconds when downloading microsoft/powerplatform-actions@v0'.
-    #
-    # Microsoft blames github for the slow LFS repo downloads, but it still seems to happen
-    # So use v1 with the faster nuget download install.
-    - name: Install Power Platform Tools
-      uses: microsoft/powerplatform-actions/actions-install@v1
-
-    - name: who-am-i action
-      uses: microsoft/powerplatform-actions/who-am-i@v1
-      with:
-        environment-url: ${{env.ENVIRONMENT_URL}}
-        app-id: ${{env.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
-        tenant-id: ${{env.TENANT_ID}}
-
-    - name: export-solution action
-      uses: microsoft/powerplatform-actions/export-solution@v1
-      with:
-        environment-url: ${{env.ENVIRONMENT_URL}}
-        app-id: ${{env.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
-        tenant-id: ${{env.TENANT_ID}}
-        solution-name: ${{ github.event.inputs.solution_name }}
-        solution-output-file: ${{ github.event.inputs.solution_exported_folder }}/${{ github.event.inputs.solution_name }}.zip
-
-    # This is so files removed from the new export will be committed, otherwise checkout
-    # adds the files back.
-    - name: Remove Old Solution
-      run: |
-        # Don't need -f because it is safer (ex. variables not filled in) and they should all be owned
-        # and writable by the user.
-        rm -r ${{ github.event.inputs.solution_target_folder }}/${{ github.event.inputs.solution_name }}
-
-    - name: unpack-solution action
-      uses: microsoft/powerplatform-actions/unpack-solution@v1
-      with:
-        solution-file: ${{ github.event.inputs.solution_exported_folder }}/${{ github.event.inputs.solution_name }}.zip
-        solution-folder: ${{ github.event.inputs.solution_target_folder }}/${{ github.event.inputs.solution_name }}
-        solution-type: 'Unmanaged'
-        overwrite-files: true
-
-    - name: Commit changes
-      run: |
-        git config --global user.email "6386318+m-metz@users.noreply.github.com"
-        git config --global user.name "Mike Metz"
-        git checkout main
-        # --no-ignore-removal (A.K.A. --all) is needed so that file and folder removals are also committed.
-        # This will error out if the folder cannot be found, which is what we want during an export error.
-        git add --no-ignore-removal '${{ github.event.inputs.solution_target_folder }}'
-        # || true to surpress commit error "nothing to commit" when there are no changes
-        git commit -m "${{github.event.inputs.commit_message}}" || true
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-        git push
+        solution_name: ${{ github.event.inputs.solution_name }}
+        commit_message: ${{ github.event.inputs.commit_message }}
