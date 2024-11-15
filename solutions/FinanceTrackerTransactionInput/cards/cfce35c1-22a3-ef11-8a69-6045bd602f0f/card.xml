@@ -1,7 +1,0 @@
-<card cardid="cfce35c1-22a3-ef11-8a69-6045bd602f0f">
-  <appdefinition>{"screens":{"main":{"template":{"type":"AdaptiveCard","body":[{"type":"TextBlock","size":"Medium","weight":"bolder","text":"Your card title goes here","id":"textLabel1"},{"type":"TextBlock","text":"Add and remove element to customize your new card.","wrap":true,"id":"textLabel2"},{"type":"TextBlock","id":"textLabel3","wrap":true,"text":"Example Text"}],"actions":[],"$schema":"http://adaptivecards.io/schemas/1.5.0/adaptive-card.json","version":"1.5"},"verbs":{"submit":"echo"}}},"sampleData":{"main":{}},"connections":{},"variables":{},"flows":{},"locale":"en-US"}</appdefinition>
-  <iscustomizable>1</iscustomizable>
-  <name>Example Card</name>
-  <statecode>0</statecode>
-  <statuscode>1</statuscode>
-</card>
