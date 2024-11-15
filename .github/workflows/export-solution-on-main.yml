@@ -14,8 +14,6 @@ on:
         description: 'Commit message to use when commiting the solution. " must be escaped (\")'
         required: true
         default: 'Export - DEV Environment'
-permissions:
-  contents: write
 jobs:
   export-solution-on-main:
     uses: m-metz/actions/.github/workflows/export-solution-on-main.yml@main
@@ -24,3 +22,4 @@ jobs:
       commit_message: ${{ github.event.inputs.commit_message }}
     permissions:
       id-token: write
+      contents: write
