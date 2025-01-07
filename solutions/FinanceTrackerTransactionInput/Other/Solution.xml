@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.24103.192" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24103.192" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.24111.00172">
+<ImportExportXml version="9.2.24122.148" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24122.148" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.24122.00154">
   <SolutionManifest>
     <UniqueName>FinanceTrackerTransactionInput</UniqueName>
     <LocalizedNames>
@@ -79,7 +79,11 @@
         </Address>
       </Addresses>
     </Publisher>
-    <RootComponents />
+    <RootComponents>
+      <RootComponent type="1" schemaName="mmetz_validcategory" behavior="0" />
+      <RootComponent type="29" id="{f8d196ef-d2ab-ef11-8a69-6045bd5dbdaf}" behavior="0" />
+      <RootComponent type="300" schemaName="mmetz_financetrackertransactioninput_966cf" behavior="0" />
+    </RootComponents>
     <MissingDependencies />
   </SolutionManifest>
 </ImportExportXml>

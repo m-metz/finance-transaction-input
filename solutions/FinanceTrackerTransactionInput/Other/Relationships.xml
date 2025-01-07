@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="business_unit_mmetz_validcategory" />
+  <EntityRelationship Name="lk_mmetz_validcategory_createdby" />
+  <EntityRelationship Name="lk_mmetz_validcategory_modifiedby" />
+  <EntityRelationship Name="owner_mmetz_validcategory" />
+  <EntityRelationship Name="team_mmetz_validcategory" />
+  <EntityRelationship Name="user_mmetz_validcategory" />
+</EntityRelationships>

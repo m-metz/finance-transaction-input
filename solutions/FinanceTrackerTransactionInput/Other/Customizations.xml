@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24103.192" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.24111.00172">
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24122.148" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.24122.00154">
   <Entities />
   <Roles />
   <Workflows />
@@ -11,6 +11,25 @@
   <optionsets />
   <CustomControls />
   <EntityDataProviders />
+  <CanvasApps />
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="mmetz_sharedcommondataserviceforapps_c754c">
+      <connectionreferencedisplayname>Microsoft Dataverse FinanceTrackerTransactionInput-c754c</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="mmetz_sharedexcelonline_53fa6">
+      <connectionreferencedisplayname>Excel Online (OneDrive) FinanceTrackerTransactionInput-53fa6</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_excelonline</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
   <Languages>
     <Language>1033</Language>
   </Languages>

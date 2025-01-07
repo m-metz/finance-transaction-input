@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{f52b310b-1103-4956-9f49-e75ab6192646}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="mmetz_category" select="1" icon="1" preview="1">
+        <row name="result" id="mmetz_validcategoryid">
+          <cell name="mmetz_category" width="300" />
+          <cell name="createdon" width="125" />
+          <cell name="mmetz_subcategory" width="150" />
+          <cell name="mmetz_validcategory" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="mmetz_validcategory">
+          <attribute name="mmetz_validcategoryid" />
+          <attribute name="mmetz_category" />
+          <attribute name="createdon" />
+          <order attribute="mmetz_category" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="mmetz_subcategory" />
+          <attribute name="mmetz_validcategory" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Valid Categories" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

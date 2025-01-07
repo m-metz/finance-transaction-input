@@ -1,0 +1,110 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_excelonline": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "mmetz_sharedexcelonline_53fa6"
+        },
+        "api": {
+          "name": "shared_excelonline"
+        }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "mmetz_sharedcommondataserviceforapps_c754c"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "startTime": "2024-11-26T17:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "100eb9c0-01fd-4c6f-91f4-02e17ef00537"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "List_rows_present_in_a_table": {
+          "runAfter": {},
+          "metadata": {
+            "5564EAC6A68D4D1B!711426": "/Real%20Documents/Finances/Financial%20Planning/Transactions/Financial Institutions Transactions.xlsx",
+            "operationMetadataId": "e8607554-d9dd-4aa1-a72f-65cd8ceceac7"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_excelonline",
+              "operationId": "GetItems",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonline"
+            },
+            "parameters": {
+              "file": "5564EAC6A68D4D1B!711426",
+              "table": "{3849FA21-EA80-4813-A93F-00401D585673}"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@outputs('List_rows_present_in_a_table')?['body/value']",
+          "actions": {
+            "Upsert_a_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "f464f728-ecfc-4bf9-a8b9-7420b16b8e4f"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "mmetz_validcategories",
+                  "recordId": "@trim(items('Apply_to_each')?['Valid Category'])",
+                  "item/mmetz_category": "@items('Apply_to_each')?['Category']",
+                  "item/mmetz_subcategory": "@items('Apply_to_each')?['Subcategory']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "List_rows_present_in_a_table": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "95472772-93bb-4d69-b2e2-9b9c86daaeae"
+          },
+          "type": "Foreach"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}
