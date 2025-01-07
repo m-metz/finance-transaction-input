@@ -24,13 +24,13 @@
       "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
       "contentVersion": "1.0.0.0",
       "parameters": {
-        "$connections": {
-          "defaultValue": {},
-          "type": "Object"
-        },
         "$authentication": {
           "defaultValue": {},
           "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
         }
       },
       "triggers": {
@@ -55,40 +55,38 @@
           },
           "type": "OpenApiConnection",
           "inputs": {
-            "host": {
-              "connectionName": "shared_excelonline",
-              "operationId": "GetItems",
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonline"
-            },
             "parameters": {
               "file": "5564EAC6A68D4D1B!711426",
               "table": "{3849FA21-EA80-4813-A93F-00401D585673}"
             },
-            "authentication": "@parameters('$authentication')"
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonline",
+              "operationId": "GetItems",
+              "connectionName": "shared_excelonline"
+            }
           }
         },
         "Apply_to_each": {
           "foreach": "@outputs('List_rows_present_in_a_table')?['body/value']",
           "actions": {
             "Upsert_a_row": {
-              "runAfter": {},
               "metadata": {
                 "operationMetadataId": "f464f728-ecfc-4bf9-a8b9-7420b16b8e4f"
               },
               "type": "OpenApiConnection",
               "inputs": {
-                "host": {
-                  "connectionName": "shared_commondataserviceforapps",
-                  "operationId": "UpdateRecord",
-                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                },
                 "parameters": {
                   "entityName": "mmetz_validcategories",
                   "recordId": "@trim(items('Apply_to_each')?['Valid Category'])",
                   "item/mmetz_category": "@items('Apply_to_each')?['Category']",
-                  "item/mmetz_subcategory": "@items('Apply_to_each')?['Subcategory']"
+                  "item/mmetz_subcategory": "@items('Apply_to_each')?['Subcategory']",
+                  "item/mmetz_validcategory": "@item()?['Valid Category']"
                 },
-                "authentication": "@parameters('$authentication')"
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "UpdateRecord",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
               }
             }
           },
@@ -104,7 +102,7 @@
         }
       }
     },
-    "templateName": ""
+    "templateName": null
   },
   "schemaVersion": "1.0.0.0"
 }
